@@ -1,0 +1,120 @@
+Mormonizer spec
+- Converts text to Mormon friendly text.  For example, shit becomes poop and classic becomes clbuttic.
+- Also has support for Victor Borge style inflationary language
+  - Twice upon a time there lived in sunny Califivenia a young man named Bob. He was a third lieutelevenant in the U.S. Air Fiveces. Bob had been fond of Anna, his one and a half sister ever since she saw the light of day five the second time. And they were both proud of the fact that two of his fivefathers had been among the creninetors of the U.S. Constithreetion. They were dining on the terrace. "Anna," he said as he threek a bite of marinnined herring, "You look twoderful threenight. You've never looked that lovely befive.
+  - This already exists at http://www.kor.dk/borge/inflate.php
+- The main part of the backend and admin is the translation system.  I have added a reddit style front end with comments and voting for the translations.
+
+==================================================
+Database
+
+User
+- devise migration
+- add an admin column
+
+Translations
+- user_id: integer
+- input_text: text
+- output_text: text
+
+Languages
+- name: string
+- description: text
+
+Words
+- language_id: integer
+- word: string
+- replacement_word: string
+
+Scores
+- user id
+- scorable id: polymorphic relationship, comments and translations scorable
+- scorable type
+- score: will generally be 1 or -1
+
+Translation Comments
+- user id
+- parent comment id: if null, this comment is a top level comment
+- text
+
+==================================================
+Models
+
+Language
+- A collection of words to replace with a a name a description
+- examples are Mormon, and Inflationary
+- the simplest language is one that changes the word Dwight to diapers
+
+Word
+- a pair of a word to match and a word to replace
+- should be able to match partial words
+  - ass => butt should match classic
+- should also be able to match different capitalizations and match them in the output
+  - ass => butt should match Assassination and turn it into Buttbuttination
+- a langauge is a collection of these words
+
+Translation
+- Applies a language to inputted text
+- for each word of the text, apply each word of the language and make any matched changes
+  - need to be careful to not have a circular match and match each word once
+  - probably need to parse word by word
+    - this leads to problems because there is no constraint limiting word model instances to a single word without spaces
+
+Scores and Comments
+- see reddit
+
+==================================================
+Pages: 
+
+Navigation
+- Home, top 100, latest
+- Login on top right
+
+Homepage
+- Show top rated translations from the last week
+  - 250 character summaries with a link to the translation page
+  - to the left of each title will be upvote/downvote links through ajax and a total score
+- paginate using kaminari
+- link to add translation page
+  - may javascript it in
+
+Top 100
+- same thing as the home page, but shows the top links of all time
+
+Latest
+- same thing as the home page, but shows the links ordered by time of submission rather than total votes
+
+Translate
+- Top: Large text box for text input
+- Middle: language select, translate button
+- Bottom: Large text area for the translated text
+- Below that: if the user is signed in, include button to link to facebook/twitter
+  - Posts a summary with a link to the translate page on this site
+
+Languages
+- list the languages with a link to each language page
+- include the number of translations in each link
+- include the langauge description here
+
+Language
+- links to /r/language_name
+- shows the top links for a specified language
+  - currently only planning on mormon translations
+
+Translation
+- Display a single translation and it's comment tree
+  - Comment buttons on each comment to add a comment to the tree
+    - clicking opens the comment text area in the correct place
+    - ajax for submission
+    - also include a top level comment at the top of the page
+  - all comments loaded through javascript and reloaded every 30 seconds
+
+About
+- no clue what goes here
+
+Admin
+- language creation and word creation/mangement
+  - standard scaffold
+- requires an admin account
+  - the first admin must be created through a seed
+  - admins can make other users admins
