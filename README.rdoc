@@ -11,9 +11,11 @@ Database
 User
 - devise migration
 - add an admin column
+- user image file columns (generated from paperclip)
 
 Translations
 - user_id: integer
+- language_id: integer
 - input_text: text
 - output_text: text
 
