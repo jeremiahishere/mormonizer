@@ -1,8 +1,9 @@
-APP_NAME = CHANGE ME
+APP_NAME = "mormonizer"
 
 Vagrant::Config.run do |config|
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "mormonizer"
+  config.vm.box = "cloudspace_training"
+  config.vm.box_url = "cloudspace_training.box"
 
   # Assign this VM to a host only network IP, allowing you to access it
   # via the IP.
