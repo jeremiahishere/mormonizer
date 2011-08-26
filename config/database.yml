@@ -15,8 +15,9 @@ development:
   database: mormonizer_development
   pool: 5
   username: root
-  password:
-  socket: /tmp/mysql.sock
+  password: password
+  host: localhost
+  #socket: /tmp/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -28,7 +29,7 @@ test:
   database: mormonizer_test
   pool: 5
   username: root
-  password:
+  password: password
   socket: /tmp/mysql.sock
 
 production:
@@ -38,5 +39,5 @@ production:
   database: mormonizer_production
   pool: 5
   username: root
-  password:
+  password: password
   socket: /tmp/mysql.sock
