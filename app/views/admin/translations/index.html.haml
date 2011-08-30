@@ -1,25 +1,33 @@
-%h1 Listing translations
-
-%table
-  %tr
-    %th User
-    %th Language
-    %th Input text
-    %th Output text
-    %th
-    %th
-    %th
-
-  - @translations.each do |translation|
-    %tr
-      %td= translation.user_id
-      %td= translation.language_id
-      %td= translation.input_text
-      %td= translation.output_text
-      %td= link_to 'Show', admin_translation_path
-      %td= link_to 'Edit', edit_admin_translation_path(translation)
-      %td= link_to 'Destroy', admin_translation, :confirm => 'Are you sure?', :method => :delete
-
-%br
-
-= link_to 'New Translation', new_admin_translation_path
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first.active= link_to "#{t("web-app-theme.list", :default => "List")}", admin_translations_path
+      %li= link_to "#{t("web-app-theme.new", :default => "New")}", new_admin_translation_path
+  .content
+    %h2.title
+      = t("web-app-theme.all", :default => "All")
+      Translations
+    .inner
+      %table.table
+        %tr
+          %th.first ID
+          %th
+            = t("activerecord.attributes.admin_translation.user_id", :default => t("activerecord.labels.user_id", :default => "User_id"))
+          %th= t("web-app-theme.created_at", :default => "Created at")
+          %th.last &nbsp;
+        - @translations.each do |translation|
+          %tr{:class => cycle("odd", "even")}
+            %td
+              = translation.id
+            %td
+              = link_to translation.user_id, admin_translation_path(translation)
+            %td
+              = translation.created_at
+            %td.last
+              = link_to "#{t("web-app-theme.show", :default => "Show")}", admin_translation_path(translation)
+              |
+              \#{link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_admin_translation_path(translation)} |
+              \#{link_to "#{t("web-app-theme.delete", :default => "Delete")}", admin_translation_path(translation), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"}
+      .actions-bar.wat-cf
+        .actions
+- content_for :sidebar, render(:partial => 'sidebar')

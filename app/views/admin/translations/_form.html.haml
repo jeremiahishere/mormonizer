@@ -1,22 +1,22 @@
-= form_for [:admin, @translation] do |f|
-  -if @translation.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@translation.errors.count, "error")} prohibited this translation from being saved:"
-      %ul
-        - @translation.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :user_id
-    = f.number_field :user_id
-  .field
-    = f.label :language_id
-    = f.number_field :language_id
-  .field
-    = f.label :input_text
-    = f.text_area :input_text
-  .field
-    = f.label :output_text
-    = f.text_area :output_text
-  .actions
-    = f.submit 'Save'
+.group
+  = f.label :user_id, t("activerecord.attributes.translation.user_id", :default => "User"), :class => :label
+  = f.number_field :user_id, :class => 'number_field'
+  %span.description Ex: a simple text
+.group
+  = f.label :language_id, t("activerecord.attributes.translation.language_id", :default => "Language"), :class => :label
+  = f.number_field :language_id, :class => 'number_field'
+  %span.description Ex: a simple text
+.group
+  = f.label :input_text, t("activerecord.attributes.translation.input_text", :default => "Input text"), :class => :label
+  = f.text_area :input_text, :class => 'text_area'
+  %span.description Ex: a simple text
+.group
+  = f.label :output_text, t("activerecord.attributes.translation.output_text", :default => "Output text"), :class => :label
+  = f.text_area :output_text, :class => 'text_area'
+  %span.description Ex: a simple text
+.group.navform.wat-cf
+  %button.button{:type => "submit"}
+    = image_tag("web-app-theme/icons/tick.png", :alt => "#{t("web-app-theme.save", :default => "Save")}")
+    = t("web-app-theme.save", :default => "Save")
+  %span.text_button_padding= t("web-app-theme.or", :default => "or")
+  = link_to t("web-app-theme.cancel", :default => "Cancel"), admin_translations_path, :class => "text_button_padding link_button"
