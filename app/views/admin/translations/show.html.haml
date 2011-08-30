@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @translation.user_id
+%p
+  %b Language:
+  = @translation.language_id
+%p
+  %b Input text:
+  = @translation.input_text
+%p
+  %b Output text:
+  = @translation.output_text
+
+= link_to 'Edit', edit_admin_translation_path(@translation)
+\|
+= link_to 'Back', admin_translations_path
