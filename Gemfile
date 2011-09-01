@@ -27,7 +27,8 @@ group :development, :test do
   gem "cucumber-rails"
   gem "pickle", "~>0.4.7"
   gem "cucumber"
-  gem 'machinist'
+  gem 'machinist', '>= 2.0.0.beta2'
+
 end
 
 # Use unicorn as the web server
