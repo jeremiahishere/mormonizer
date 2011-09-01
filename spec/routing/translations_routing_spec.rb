@@ -1,34 +1,34 @@
 require "spec_helper"
 
-describe TranslationsController do
+describe Admin::TranslationsController do
   describe "routing" do
 
     it "routes to #index" do
-      get("/translations").should route_to("translations#index")
+      get("/admin/translations").should route_to("admin/translations#index")
     end
 
     it "routes to #new" do
-      get("/translations/new").should route_to("translations#new")
+      get("/admin/translations/new").should route_to("admin/translations#new")
     end
 
     it "routes to #show" do
-      get("/translations/1").should route_to("translations#show", :id => "1")
+      get("/admin/translations/1").should route_to("admin/translations#show", :id => "1")
     end
 
     it "routes to #edit" do
-      get("/translations/1/edit").should route_to("translations#edit", :id => "1")
+      get("/admin/translations/1/edit").should route_to("admin/translations#edit", :id => "1")
     end
 
     it "routes to #create" do
-      post("/translations").should route_to("translations#create")
+      post("/admin/translations").should route_to("admin/translations#create")
     end
 
     it "routes to #update" do
-      put("/translations/1").should route_to("translations#update", :id => "1")
+      put("/admin/translations/1").should route_to("admin/translations#update", :id => "1")
     end
 
     it "routes to #destroy" do
-      delete("/translations/1").should route_to("translations#destroy", :id => "1")
+      delete("/admin/translations/1").should route_to("admin/translations#destroy", :id => "1")
     end
 
   end

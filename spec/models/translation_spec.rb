@@ -1,5 +1,61 @@
 require 'spec_helper'
 
 describe Translation do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "should respond to user" do
+    Translation.new.should respond_to :user
+  end
+
+  it "should respond to language" do
+    Translation.new.should respond_to :language
+  end
+
+  describe "validations" do
+    before(:each) do
+      @translation = Translation.new
+      @valid_attributes = {
+        :user_id => 1,
+        :language_id => 2,
+        :input_text => 3
+      }
+    end
+    it "should be valid" do
+      @translation.attributes = @valid_attributes
+      @translation.should be_valid
+    end
+
+    it "should require a user" do
+      @translation.should have(1).error_on(:user_id)
+    end
+
+    it "should require a langauge" do
+      @translation.should have(1).error_on(:language_id)
+    end
+
+    it "should require input text" do
+      @translation.should have(1).error_on(:input_text)
+    end
+
+    it "should require output text" do
+      @translation.should have(1).error_on(:output_text)
+    end
+  end
+
+  describe "translate_input_text" do
+    before(:each) do
+      @translation = Translation.new
+    end
+
+    it "should be called before validation" do
+      @translation.should_receive(:translate_input_text)
+      @translation.valid?
+    end
+
+    it "should save the input text to the output text (for now)" do
+      # THIS IS TEMPORARY
+      # until the actual translate method gets written
+      @translation.input_text = "hello world"
+      @translation.valid?
+      @translation.output_text.should == "hello world"
+    end
+  end
 end
