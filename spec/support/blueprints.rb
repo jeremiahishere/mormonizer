@@ -17,11 +17,13 @@ end
 #User.blueprint do
 #end
 
-#Language.blueprint do
-#end
-
 Word.blueprint do
   language { Language.make}
   match_word { "dwight" }
   replacement_word { "diapers" }
+end
+
+Language.blueprint do
+  name { "Annoying" }
+  description { "This language is here to be annoying" }
 end
