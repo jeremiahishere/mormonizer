@@ -26,8 +26,10 @@ class Ability
     # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
     user ||= User.new
     if user.has_role? :admin
+      can :manage, :all
     end
     if user.has_role? :user
+      can :manager, Translation
     end
     # guest permissions
     # none for now

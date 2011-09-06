@@ -3,6 +3,7 @@ Mormonizer::Application.routes.draw do
 
   namespace :admin do
     resources :translations
+    resources :users
   end
 
   root :to => "pages#index"

@@ -7,6 +7,7 @@ gem 'haml-rails'
 gem 'therubyracer'
 gem 'hpricot'
 gem 'ruby_parser'
+gem 'formtastic'
 
 gem 'devise'
 gem 'cancan'
