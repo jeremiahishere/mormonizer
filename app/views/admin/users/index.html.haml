@@ -1,19 +1,32 @@
-%h1 Listing users
-
-%table
-  %tr
-    %th Name
-    %th Roles
-    %th
-    %th
-  - @users.each do |user|
-    %tr
-      %td= user.name
-      %td
-        - if user.roles.length > 0
-          %ul
-            - user.roles.each do |role|
-              %li= role.name
-      %td= link_to 'Show', admin_user_path(user)
-      %td= link_to 'Edit Roles', edit_admin_user_path(user)
-      %td= button_to 'Destroy', admin_user_path(user), :confirm => 'Are you sure?', :method => :delete
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first.active= link_to "#{t("web-app-theme.list", :default => "List")}", admin_users_path
+  .content
+    %h2.title
+      = t("web-app-theme.all", :default => "All")
+      Users
+    .inner
+      %table.table
+        %tr
+          %th.first ID
+          %th
+            = t("activerecord.attributes.admin_user.email", :default => t("activerecord.labels.email", :default => "Email"))
+          %th= t("web-app-theme.created_at", :default => "Created at")
+          %th.last &nbsp;
+        - @users.each do |user|
+          %tr{:class => cycle("odd", "even")}
+            %td
+              = user.id
+            %td
+              = link_to user.email, admin_user_path(user)
+            %td
+              = user.created_at
+            %td.last
+              = link_to "#{t("web-app-theme.show", :default => "Show")}", admin_user_path(user)
+              |
+              \#{link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_admin_user_path(user)} |
+              \#{link_to "#{t("web-app-theme.delete", :default => "Delete")}", admin_user_path(user), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"}
+      .actions-bar.wat-cf
+        .actions
+- content_for :sidebar, render(:partial => 'sidebar')

@@ -10,19 +10,13 @@
       = notice
     %p.alert
       = alert
-    = render :partial => "/shared/user_login_state"
     #container
       #header
         %h1
           %a{:href => "/"} mormonizer
         #user-navigation
           %ul.wat-cf
-            %li
-              %a{:href => "#"}= t("web-app-theme.profile", :default => "Profile")
-            %li
-              %a{:href => "#"}= t("web-app-theme.settings", :default => "Settings")
-            %li
-              %a.logout{:href => "/logout"}= t("web-app-theme.logout", :default => "Logout")
+            = render :partial => "/shared/user_login_state"
         #main-navigation
           %ul.wat-cf
       #wrapper.wat-cf

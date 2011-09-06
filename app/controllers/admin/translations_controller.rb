@@ -1,6 +1,7 @@
 module Admin
   class TranslationsController < ApplicationController
     load_and_authorize_resource
+
     # GET /translations
     # GET /translations.json
     def index
