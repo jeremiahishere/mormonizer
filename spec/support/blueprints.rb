@@ -27,3 +27,15 @@ Language.blueprint do
   name { "Annoying" }
   description { "This language is here to be annoying" }
 end
+
+User.blueprint do
+  # Attributes here
+end
+
+UserRole.blueprint do
+  # Attributes here
+end
+
+Role.blueprint do
+  # Attributes here
+end
