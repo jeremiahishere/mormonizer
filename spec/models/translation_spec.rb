@@ -50,12 +50,23 @@ describe Translation do
       @translation.valid?
     end
 
-    it "should save the input text to the output text (for now)" do
-      # THIS IS TEMPORARY
-      # until the actual translate method gets written
+  end
+  describe "translate_input_text method" do
+    before(:each) do
+      @translation = Translation.new
+      @language = Language.new
+    end
+
+    it "should save the input text to the output text if no language is specified" do
       @translation.input_text = "hello world"
       @translation.valid?
       @translation.output_text.should == "hello world"
+    end
+
+    it "should call the langauge's translate function is the language is specified" do
+      @translation.language = @language
+      @language.should_receive(:translate).and_return("goodbye world")
+      @translation.translate_input_text.should == "goodbye world"
     end
   end
 end
