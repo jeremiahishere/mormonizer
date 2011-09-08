@@ -37,4 +37,25 @@ describe Word do
       @word.should have(0).error_on(:replacement_word)
     end
   end
+
+  describe "translation method" do
+    before(:each) do
+      @word = Word.new(
+        :match_word => "dwight",
+        :replacement_word => "diapers"
+      )
+    end
+
+    it "should translate the word if matched" do
+      @word.translate("123dwight456").should == "123diapers456"
+    end
+
+    it "should not touch the word if not matched" do
+      @word.translate("123dwigt456").should == "123dwigt456"
+    end
+
+    it "should translate the word multiple times if matched multiple times" do
+      @word.translate("dwightdwight").should == "diapersdiapers"
+    end
+  end
 end

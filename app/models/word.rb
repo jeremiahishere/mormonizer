@@ -14,4 +14,11 @@ class Word < ActiveRecord::Base
       self.errors.add(:replacement_word, "can't be blank")
     end
   end
+
+  # given a word, find all matches, and replacement
+  # @param [String] input_word The word to change
+  # @return [String] The word with changes applied
+  def translate(input_word)
+    input_word.gsub(self.match_word, self.replacement_word)
+  end
 end
