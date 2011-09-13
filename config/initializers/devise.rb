@@ -3,6 +3,7 @@
 Devise.setup do |config|
   # omniauth facebook login
   config.omniauth :facebook, '208040305925438', 'b25ca4d7704b37fe2fb8df06b8eac992'
+  config.omniauth :twitter, 'zntqGZYR7Rm4W3rPMZRtg', 'BDCKExI9NqlPBxzGem0H8y5uhrYhgvzC8iSxIP4KgU'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
