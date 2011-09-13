@@ -12,7 +12,7 @@
           %th.first ID
           %th
             = t("activerecord.attributes.admin_user.email", :default => t("activerecord.labels.email", :default => "Email"))
-          %th= t("web-app-theme.created_at", :default => "Created at")
+          %th Roles
           %th.last &nbsp;
         - @users.each do |user|
           %tr{:class => cycle("odd", "even")}
@@ -21,7 +21,10 @@
             %td
               = link_to user.email, admin_user_path(user)
             %td
-              = user.created_at
+              - if user.roles.length > 0
+                %ul
+                  - user.roles.each do |role|
+                    %li= role.name
             %td.last
               = link_to "#{t("web-app-theme.show", :default => "Show")}", admin_user_path(user)
               |

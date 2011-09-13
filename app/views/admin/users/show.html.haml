@@ -7,6 +7,11 @@
   .content
     .inner
       %p
+        %b Roles:
+        %ul
+          - @user.roles.each do |role|
+            %li= role.name
+      %p
         %b
           = t("activerecord.attributes.admin_user.email", :default => t("activerecord.labels.email", :default => "Email"))
           \:
