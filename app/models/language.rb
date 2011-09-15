@@ -1,7 +1,9 @@
 # Stores a collection of words that are applied to a translation to edit the input text
 class Language < ActiveRecord::Base
   has_many :translations
+
   has_many :words
+  accepts_nested_attributes_for :words, :allow_destroy => true
 
   validates_presence_of :name
 

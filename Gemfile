@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '3.1.0.rc8'
 gem 'mysql2'
 
+gem 'jquery-rails'
 gem 'haml-rails'
 gem 'therubyracer'
 gem 'hpricot'

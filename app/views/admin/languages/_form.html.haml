@@ -1,14 +1,25 @@
-.group
-  = f.label :name, t("activerecord.attributes.language.name", :default => "Name"), :class => :label
-  = f.text_field :name, :class => 'text_field'
-  %span.description Ex: a simple text
-.group
-  = f.label :description, t("activerecord.attributes.language.description", :default => "Description"), :class => :label
-  = f.text_area :description, :class => 'text_area'
-  %span.description Ex: a simple text
-.group.navform.wat-cf
-  %button.button{:type => "submit"}
-    = image_tag("web-app-theme/icons/tick.png", :alt => "#{t("web-app-theme.save", :default => "Save")}")
-    = t("web-app-theme.save", :default => "Save")
-  %span.text_button_padding= t("web-app-theme.or", :default => "or")
-  = link_to t("web-app-theme.cancel", :default => "Cancel"), admin_languages_path, :class => "text_button_padding link_button"
+= semantic_form_for [:admin, @language] do |f|
+  = f.semantic_errors
+  = f.inputs do
+    = f.input :name
+    = f.input :description
+
+    - @language.words.each do |word|
+      = f.fields_for :words, word do |word_form|
+        = render :partial => "word_fields", :locals => { :f => word_form }
+    = link_to_add_fields("Add Word", f, :words)
+
+  = f.buttons
+
+:javascript
+  function remove_fields(link) {
+    $(link).prev("input[type=hidden]").val("1");
+    $(link).closest(".fields").hide();
+    $(link).parent().hide();
+  }
+
+  function add_fields(link, association, content) {
+    var new_id = new Date().getTime();
+    var regexp = new RegExp("new_" + association, "g");
+    $(link).parent().before(content.replace(regexp, new_id));
+  }

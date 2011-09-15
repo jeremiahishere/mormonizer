@@ -9,6 +9,5 @@
       = t("web-app-theme.edit", :default => "Edit")
       Language
     .inner
-      = form_for @language, :url => admin_language_path(@language), :html => { :class => :form } do |f|
-        = render :partial => "form", :locals => {:f => f}
+      = render :partial => "form"
 - content_for :sidebar, render(:partial => 'sidebar')

@@ -8,6 +8,5 @@
       = t("web-app-theme.new", :default => "New")
       Language
     .inner
-      = form_for :language, :url => admin_languages_path, :html => { :class => :form } do |f|
-        = render :partial => "form", :locals => {:f => f}
+      = render :partial => "form"
 - content_for :sidebar, render(:partial => 'sidebar')
