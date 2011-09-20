@@ -33,7 +33,9 @@ group :development, :test do
   gem "cucumber-rails"
   gem "pickle", "~>0.4.7"
   gem "cucumber"
-  gem 'machinist', '>= 2.0.0.beta2'
+  gem "machinist", ">= 2.0.0.beta2"
+  gem "faker"
+  gem "shoulda-matchers"
 
 end
 
