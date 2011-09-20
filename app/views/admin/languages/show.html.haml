@@ -16,6 +16,18 @@
           = t("activerecord.attributes.admin_language.description", :default => t("activerecord.labels.description", :default => "Description"))
           \:
         = @language.description
+      %p
+        - if @language.words.count > 0
+          %b
+            Words
+          %ul
+            - @language.words.each do |word|
+              %li
+                = word.match_word
+                \=>
+                = word.replacement_word
+
+
       .wat-cf
         = link_to image_tag("web-app-theme/icons/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}") + " " + t("web-app-theme.edit", :default=> "Edit"), edit_admin_language_path(@language), :class => "button"
         = link_to image_tag("web-app-theme/icons/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}") + " " + t("web-app-theme.delete", :default => "Delete"), admin_language_path(@language), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}"

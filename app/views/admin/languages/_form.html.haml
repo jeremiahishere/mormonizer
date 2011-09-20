@@ -4,10 +4,13 @@
     = f.input :name
     = f.input :description
 
-    - @language.words.each do |word|
-      = f.fields_for :words, word do |word_form|
-        = render :partial => "word_fields", :locals => { :f => word_form }
-    = link_to_add_fields("Add Word", f, :words)
+    .word_fields
+      - @language.errors['words.match_word'].each do |e|
+        = "Match word " + e
+      - @language.words.each do |word|
+        = f.fields_for :words, word do |word_form|
+          = render :partial => "word_fields", :locals => { :f => word_form }
+      = link_to_add_fields("Add Word", f, :words)
 
   = f.buttons
 
