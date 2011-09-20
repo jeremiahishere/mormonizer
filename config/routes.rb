@@ -8,5 +8,6 @@ Mormonizer::Application.routes.draw do
     resources :languages
   end
 
-  root :to => "pages#index"
+  resources :translations
+  root :to => "translations#index"
 end

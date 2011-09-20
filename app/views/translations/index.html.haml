@@ -1,0 +1,16 @@
+= semantic_form_for @translation, :remote => true,:success => "console.log(request);" do |f|
+  = f.inputs do
+    = f.input :input_text, :input_html => { :cols => 100, :rows => 8 }
+    = f.input :language, :as => :select
+  = f.buttons do
+    = f.submit "Translate"
+  = f.inputs do
+    = f.input :output_text, :input_html => { :cols => 100, :rows => 8 }
+
+:javascript
+  $(document).ready(function() {
+    $('form[id^=new_translation]').bind("ajax:success", function(event, data) {
+      console.log(data.output_text);
+      $('#translation_output_text').html(data.output_text);
+    });
+  });
