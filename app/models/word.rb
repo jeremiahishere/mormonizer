@@ -4,7 +4,11 @@
 class Word < ActiveRecord::Base
   belongs_to :language
 
-  validates_presence_of :language_id, :match_word
+  # because of the way the nested words work on the language page, language id cannot be mandatory on create
+  # could add :on => :update if needed
+  # validates_presence_of :language_id
+  
+  validates_presence_of :match_word
   validate :replacement_word_not_nil
 
   # Wanted to do a validates presence of but allow empty strings
