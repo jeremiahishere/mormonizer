@@ -1,0 +1,9 @@
+- if can? :read, Translation
+  %li{:class => controller.controller_path == "admin/translations" ? 'active' : '' }
+    =link_to "Translation", admin_translations_path
+- if can? :read, Language
+  %li{:class => controller.controller_path == "admin/languages" ? 'active' : '' }
+    = link_to "Language", admin_languages_path
+- if can? :read, User
+  %li{:class => controller.controller_path == "admin/users" ? 'active' : '' }
+    = link_to "User", admin_users_path

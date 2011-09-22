@@ -29,7 +29,7 @@ class Ability
       can :manage, :all
     end
     if user.has_role? :user
-      can :manager, Translation
+      can :manage, Translation
     end
     # guest permissions
     # none for now
