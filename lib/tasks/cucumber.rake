@@ -32,6 +32,20 @@ begin
       t.profile = 'rerun'
     end
 
+    # setup javascript tests
+    task :setup_js_with_vnc4server do
+      ENV['DISPLAY'] = ":99" 
+      %x{vncserver :99 2>/dev/null >/dev/null &} 
+      %x{DISPLAY=:99 firefox 2>/dev/null >/dev/null &}
+    end
+
+    # tear down javascript tests
+    # with a hammer
+    task :kill_js do 
+      %x{killall Xvnc4} 
+      %x{killall firefox}
+    end
+
     desc 'Run all features'
     task :all => [:ok, :wip]
 
@@ -41,8 +55,8 @@ begin
       ::CodeStatistics::TEST_TYPES << "Cucumber features" if File.exist?('features')
     end
   end
-  desc 'Alias for cucumber:ok'
-  task :cucumber => 'cucumber:ok'
+  desc 'Alias for cucumber:ok with javascript' 
+  task :cucumber => ['cucumber:setup_js_with_vnc4server', 'cucumber:ok', 'cucumber:kill_js']
 
   task :default => :cucumber
 
