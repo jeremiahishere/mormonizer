@@ -11,6 +11,13 @@ module NavigationHelpers
     when /^the home\s?page$/
       '/'
 
+    when /^login$/
+      '/users/sign_in'
+    when /^the sign in page$/
+      '/users/sign_in'
+    when /^the register page$/
+      '/users/sign_up'
+
     # note the weird hack when matching the model
     # in almost every case, it should match only the plural version of the model
     # but in the person model, it needs to match people with no plural
