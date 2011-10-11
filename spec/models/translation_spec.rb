@@ -1,12 +1,13 @@
 require 'spec_helper'
 
 describe Translation do
-  it "should respond to user" do
-    Translation.new.should respond_to :user
-  end
+  describe "relationships" do
+    before(:each) do
+      @translation = Translation.new
+    end
 
-  it "should respond to language" do
-    Translation.new.should respond_to :language
+    it { @translation.should belong_to :user }
+    it { @translation.should belong_to :language }
   end
 
   describe "validations" do

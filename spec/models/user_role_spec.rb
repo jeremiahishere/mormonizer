@@ -1,5 +1,21 @@
 require 'spec_helper'
 
 describe UserRole do
-  #pending "add some examples to (or delete) #{__FILE__}"
+  describe "relationships" do
+    before(:each) do
+      @user_role = UserRole.new
+    end
+
+    it { @user_role.should belong_to :user }
+    it { @user_role.should belong_to :role }
+  end
+
+  describe "validations" do
+    before(:each) do
+      @user_role = UserRole.new
+    end
+
+    it { @user_role.should validate_presence_of :user_id }
+    it { @user_role.should validate_presence_of :role_id }
+  end
 end

@@ -1,12 +1,17 @@
 require 'spec_helper'
 
 describe Language do
-  it "should respond to translations" do
-    Language.new.should respond_to :translations
-  end
+  describe "relationships" do
+    before(:each) do
+        @language = Language.new
+    end
+    it "should have many translations" do
+      @language.should have_many :translations
+    end
 
-  it "should respond to words" do
-    Language.new.should respond_to :words
+    it "should have many words" do
+      @language.should have_many :words
+    end
   end
 
   describe "validations" do

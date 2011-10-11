@@ -1,8 +1,12 @@
 require 'spec_helper'
 
 describe Word do
-  it "should respond to language" do
-    Word.new.should respond_to :language
+  describe "relationships" do
+    before(:each) do
+      @word = Word.new
+    end
+
+    it { @word.should belong_to :language }
   end
 
   describe "validations" do
@@ -20,10 +24,6 @@ describe Word do
       @word.should be_valid
     end
 
-    it "should require language" do
-      @word.should have(1).error_on(:language_id)
-    end
-
     it "should require a match word" do
       @word.should have(1).error_on(:match_word)
     end
@@ -35,6 +35,11 @@ describe Word do
     it "should not error if the replacement word is a blank string" do
       @word.replacement_word = ""
       @word.should have(0).error_on(:replacement_word)
+    end
+    
+    it "should error if the replacement word is nil" do
+      @word.replacement_word = nil
+      @word.should have(1).error_on(:replacement_word)
     end
   end
 
